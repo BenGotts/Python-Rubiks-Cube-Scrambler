@@ -1,4 +1,6 @@
 import random
+from scrambleImage import scramble
+from scrambleImage import image
 
 moves = ["U", "D", "F", "B", "R", "L"]
 dir = ["", "'", "2"]
@@ -30,4 +32,17 @@ def sprint(ar):
         print(str(ar[x][0]) + str(ar[x][1]), end = " ")
 
 s = scramble_replace(scramble_gen())
-sprint(valid(s))
+valid(s)
+# sprint(valid(s))
+# print("[" + str(slen) + "]\n")
+
+scramble(s, slen)
+
+# scramble([["R", ""], ["U", ""], ["R", "'"]], 1)
+
+scr = ""
+for x in range(len(s)):
+    scr += str(s[x][0]) + str(s[x][1]) + " "
+scr += "[" + str(slen) + "]"
+
+image(scr)
