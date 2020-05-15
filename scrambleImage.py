@@ -343,7 +343,9 @@ def scramble(scr, len):
     #                                             "    " + cube[5][6] + cube[5][5] + cube[5][4] + "\n"
     # )
     #
-    return
+    return cube
+
+
 
 import cv2 as cv
 import numpy as np
