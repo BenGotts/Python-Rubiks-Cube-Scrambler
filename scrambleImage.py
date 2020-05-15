@@ -315,21 +315,15 @@ def bMove(move):
     return
 
 def scramble(scr, len):
-    x=0
-    for x in range(len):
-        if(scr[x][0] == "U"):
-            uMove(scr[x][0]+scr[x][1])
-        elif(scr[x][0] == "D"):
-            dMove(scr[x][0]+scr[x][1])
-        elif(scr[x][0] == "R"):
-            rMove(scr[x][0]+scr[x][1])
-        elif(scr[x][0] == "L"):
-            lMove(scr[x][0]+scr[x][1])
-        elif(scr[x][0] == "F"):
-            fMove(scr[x][0]+scr[x][1])
-        elif(scr[x][0] == "B"):
-            bMove(scr[x][0]+scr[x][1])
-
+    for x in scr:
+        {
+        'U': uMove(str(x[0])+str(x[1])),
+        'D': dMove(str(x[0])+str(x[1])),
+        'R': rMove(str(x[0])+str(x[1])),
+        'L': lMove(str(x[0])+str(x[1])),
+        'F': fMove(str(x[0])+str(x[1])),
+        'B': bMove(str(x[0])+str(x[1]))
+        }.get(x[0], 0)
 
     # print(
     #                                             "    " + cube[0][0] + cube[0][1] + cube[0][2] + "\n" +
