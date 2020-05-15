@@ -1,74 +1,33 @@
+import sys
+try:
+    import cv2 as cv
+    import numpy as np
+except:
+    print("OpenCV and numpy not installed!")
+
 cube = [['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w'], ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'], ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], ['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r'], ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'], ['y', 'y', 'y', 'y', 'y', 'y', 'y', 'y']]
 
 def faceMove(x):
-    temp = cube[x][0]
-    cube[x][0] = cube[x][6]
-    cube[x][6] = cube[x][4]
-    cube[x][4] = cube[x][2]
-    cube[x][2] = temp
-
-    temp = cube[x][1]
-    cube[x][1] = cube[x][7]
-    cube[x][7] = cube[x][5]
-    cube[x][5] = cube[x][3]
-    cube[x][3] = temp
+    cube[x][0], cube[x][6], cube[x][4], cube[x][2] = cube[x][6], cube[x][4], cube[x][2], cube[x][0]
+    cube[x][1], cube[x][7], cube[x][5], cube[x][3] = cube[x][7], cube[x][5], cube[x][3], cube[x][1]
     return
 
 def faceMovePrime(x):
-    temp = cube[x][0]
-    cube[x][0] = cube[x][2]
-    cube[x][2] = cube[x][4]
-    cube[x][4] = cube[x][6]
-    cube[x][6] = temp
-
-    temp = cube[x][1]
-    cube[x][1] = cube[x][3]
-    cube[x][3] = cube[x][5]
-    cube[x][5] = cube[x][7]
-    cube[x][7] = temp
+    cube[x][0], cube[x][2], cube[x][4], cube[x][6] = cube[x][2], cube[x][4], cube[x][6], cube[x][0]
+    cube[x][1], cube[x][3], cube[x][5], cube[x][7] = cube[x][3], cube[x][5], cube[x][7], cube[x][1]
     return
 
 def uMove(move):
     if(move == "U"):
         faceMove(0)
-
-        temp = cube[1][0]
-        cube[1][0] = cube[2][0]
-        cube[2][0] = cube[3][0]
-        cube[3][0] = cube[4][0]
-        cube[4][0] = temp
-
-        temp = cube[1][1]
-        cube[1][1] = cube[2][1]
-        cube[2][1] = cube[3][1]
-        cube[3][1] = cube[4][1]
-        cube[4][1] = temp
-
-        temp = cube[1][2]
-        cube[1][2] = cube[2][2]
-        cube[2][2] = cube[3][2]
-        cube[3][2] = cube[4][2]
-        cube[4][2] = temp
+        cube[1][0], cube[2][0], cube[3][0], cube[4][0] = cube[2][0], cube[3][0], cube[4][0], cube[1][0]
+        cube[1][1], cube[2][1], cube[3][1], cube[4][1] = cube[2][1], cube[3][1], cube[4][1], cube[1][1]
+        cube[1][2], cube[2][2], cube[3][2], cube[4][2] = cube[2][2], cube[3][2], cube[4][2], cube[1][2]
     elif(move == "U'"):
         faceMovePrime(0)
-
-        temp = cube[1][0]
-        cube[1][0] = cube[4][0]
-        cube[4][0] = cube[3][0]
-        cube[3][0] = cube[2][0]
-        cube[2][0] = temp
-
-        temp = cube[1][1]
-        cube[1][1] = cube[4][1]
-        cube[4][1] = cube[3][1]
-        cube[3][1] = cube[2][1]
-        cube[2][1] = temp
-
-        temp = cube[1][2]
-        cube[1][2] = cube[4][2]
-        cube[4][2] = cube[3][2]
-        cube[3][2] = cube[2][2]
-        cube[2][2] = temp
+        cube[1][0], cube[4][0], cube[3][0], cube[2][0] = cube[4][0], cube[3][0], cube[2][0], cube[1][0]
+        cube[1][1], cube[4][1], cube[3][1], cube[2][1] = cube[4][1], cube[3][1], cube[2][1], cube[1][1]
+        cube[1][2], cube[4][2], cube[3][2], cube[2][2] = cube[4][2], cube[3][2], cube[2][2], cube[1][2]
     elif(move == "U2"):
         uMove("U")
         uMove("U")
@@ -77,46 +36,14 @@ def uMove(move):
 def dMove(move):
     if(move == "D"):
         faceMove(5)
-
-        temp = cube[1][6]
-        cube[1][6] = cube[4][6]
-        cube[4][6] = cube[3][6]
-        cube[3][6] = cube[2][6]
-        cube[2][6] = temp
-
-        temp = cube[1][5]
-        cube[1][5] = cube[4][5]
-        cube[4][5] = cube[3][5]
-        cube[3][5] = cube[2][5]
-        cube[2][5] = temp
-
-        temp = cube[1][4]
-        cube[1][4] = cube[4][4]
-        cube[4][4] = cube[3][4]
-        cube[3][4] = cube[2][4]
-        cube[2][4] = temp
-        return
+        cube[1][6], cube[4][6], cube[3][6], cube[2][6] = cube[4][6], cube[3][6], cube[2][6], cube[1][6]
+        cube[1][5], cube[4][5], cube[3][5], cube[2][5] = cube[4][5], cube[3][5], cube[2][5], cube[1][5]
+        cube[1][4], cube[4][4], cube[3][4], cube[2][4] = cube[4][4], cube[3][4], cube[2][4], cube[1][4]
     elif(move == "D'"):
         faceMovePrime(5)
-
-        temp = cube[1][6]
-        cube[1][6] = cube[2][6]
-        cube[2][6] = cube[3][6]
-        cube[3][6] = cube[4][6]
-        cube[4][6] = temp
-
-        temp = cube[1][5]
-        cube[1][5] = cube[2][5]
-        cube[2][5] = cube[3][5]
-        cube[3][5] = cube[4][5]
-        cube[4][5] = temp
-
-        temp = cube[1][4]
-        cube[1][4] = cube[2][4]
-        cube[2][4] = cube[3][4]
-        cube[3][4] = cube[4][4]
-        cube[4][4] = temp
-        return
+        cube[1][6], cube[2][6], cube[3][6], cube[4][6] = cube[2][6], cube[3][6], cube[4][6], cube[1][6]
+        cube[1][5], cube[2][5], cube[3][5], cube[4][5] = cube[2][5], cube[3][5], cube[4][5], cube[1][5]
+        cube[1][4], cube[2][4], cube[3][4], cube[4][4] = cube[2][4], cube[3][4], cube[4][4], cube[1][4]
     elif(move == "D2"):
         dMove("D")
         dMove("D")
@@ -125,46 +52,14 @@ def dMove(move):
 def rMove(move):
     if(move == "R"):
         faceMove(3)
-
-        temp = cube[0][4]
-        cube[0][4] = cube[2][4]
-        cube[2][4] = cube[5][4]
-        cube[5][4] = cube[4][0]
-        cube[4][0] = temp
-
-        temp = cube[0][3]
-        cube[0][3] = cube[2][3]
-        cube[2][3] = cube[5][3]
-        cube[5][3] = cube[4][7]
-        cube[4][7] = temp
-
-        temp = cube[0][2]
-        cube[0][2] = cube[2][2]
-        cube[2][2] = cube[5][2]
-        cube[5][2] = cube[4][6]
-        cube[4][6] = temp
-        return
+        cube[0][4], cube[2][4], cube[5][4], cube[4][0] = cube[2][4], cube[5][4], cube[4][0], cube[0][4]
+        cube[0][3], cube[2][3], cube[5][3], cube[4][7] = cube[2][3], cube[5][3], cube[4][7], cube[0][3]
+        cube[0][2], cube[2][2], cube[5][2], cube[4][6] = cube[2][2], cube[5][2], cube[4][6], cube[0][2]
     elif(move == "R'"):
         faceMovePrime(3)
-
-        temp = cube[0][4]
-        cube[0][4] = cube[4][0]
-        cube[4][0] = cube[5][4]
-        cube[5][4] = cube[2][4]
-        cube[2][4] = temp
-
-        temp = cube[0][3]
-        cube[0][3] = cube[4][7]
-        cube[4][7] = cube[5][3]
-        cube[5][3] = cube[2][3]
-        cube[2][3] = temp
-
-        temp = cube[0][2]
-        cube[0][2] = cube[4][6]
-        cube[4][6] = cube[5][2]
-        cube[5][2] = cube[2][2]
-        cube[2][2] = temp
-        return
+        cube[0][4], cube[4][0], cube[5][4], cube[2][4] = cube[4][4], cube[5][4], cube[2][0], cube[0][4]
+        cube[0][3], cube[4][7], cube[5][3], cube[2][3] = cube[4][7], cube[5][3], cube[2][3], cube[0][3]
+        cube[0][2], cube[4][6], cube[5][2], cube[2][2] = cube[4][6], cube[5][2], cube[2][2], cube[0][2]
     elif(move == "R2"):
         rMove("R")
         rMove("R")
@@ -173,46 +68,14 @@ def rMove(move):
 def lMove(move):
     if(move == "L"):
         faceMove(1)
-
-        temp = cube[0][0]
-        cube[0][0] = cube[4][4]
-        cube[4][4] = cube[5][0]
-        cube[5][0] = cube[2][0]
-        cube[2][0] = temp
-
-        temp = cube[0][7]
-        cube[0][7] = cube[4][3]
-        cube[4][3] = cube[5][7]
-        cube[5][7] = cube[2][7]
-        cube[2][7] = temp
-
-        temp = cube[0][6]
-        cube[0][6] = cube[4][2]
-        cube[4][2] = cube[5][6]
-        cube[5][6] = cube[2][6]
-        cube[2][6] = temp
-        return
+        cube[0][0], cube[4][4], cube[5][0], cube[2][0] = cube[4][4], cube[5][0], cube[2][0], cube[0][0]
+        cube[0][7], cube[4][3], cube[5][7], cube[2][7] = cube[4][3], cube[5][7], cube[2][7], cube[0][7]
+        cube[0][6], cube[4][2], cube[5][6], cube[2][6] = cube[4][2], cube[5][6], cube[2][6], cube[0][6]
     elif(move == "L'"):
         faceMovePrime(1)
-
-        temp = cube[0][0]
-        cube[0][0] = cube[2][0]
-        cube[2][0] = cube[5][0]
-        cube[5][0] = cube[4][4]
-        cube[4][4] = temp
-
-        temp = cube[0][7]
-        cube[0][7] = cube[2][7]
-        cube[2][7] = cube[5][7]
-        cube[5][7] = cube[4][3]
-        cube[4][3] = temp
-
-        temp = cube[0][6]
-        cube[0][6] = cube[2][6]
-        cube[2][6] = cube[5][6]
-        cube[5][6] = cube[4][2]
-        cube[4][2] = temp
-        return
+        cube[0][0], cube[2][0], cube[5][0], cube[4][4] = cube[2][0], cube[5][0], cube[4][4], cube[0][0]
+        cube[0][7], cube[2][7], cube[5][7], cube[4][3] = cube[2][7], cube[5][7], cube[4][3], cube[0][7]
+        cube[0][6], cube[2][6], cube[5][6], cube[4][2] = cube[2][6], cube[5][6], cube[4][2], cube[0][6]
     elif(move == "L2"):
         lMove("L")
         lMove("L")
@@ -221,46 +84,14 @@ def lMove(move):
 def fMove(move):
     if(move == "F"):
         faceMove(2)
-
-        temp = cube[0][6]
-        cube[0][6] = cube[1][4]
-        cube[1][4] = cube[5][2]
-        cube[5][2] = cube[3][0]
-        cube[3][0] = temp
-
-        temp = cube[0][5]
-        cube[0][5] = cube[1][3]
-        cube[1][3] = cube[5][1]
-        cube[5][1] = cube[3][7]
-        cube[3][7] = temp
-
-        temp = cube[0][4]
-        cube[0][4] = cube[1][2]
-        cube[1][2] = cube[5][0]
-        cube[5][0] = cube[3][6]
-        cube[3][6] = temp
-        return
+        cube[0][6], cube[1][4], cube[5][2], cube[3][0] = cube[1][4], cube[5][2], cube[3][0], cube[0][6]
+        cube[0][5], cube[1][3], cube[5][1], cube[3][7] = cube[1][3], cube[5][1], cube[3][7], cube[0][5]
+        cube[0][4], cube[1][2], cube[5][0], cube[3][6] = cube[1][2], cube[5][0], cube[3][6], cube[0][4]
     elif(move == "F'"):
         faceMovePrime(2)
-
-        temp = cube[0][6]
-        cube[0][6] = cube[3][0]
-        cube[3][0] = cube[5][2]
-        cube[5][2] = cube[1][4]
-        cube[1][4] = temp
-
-        temp = cube[0][5]
-        cube[0][5] = cube[3][7]
-        cube[3][7] = cube[5][1]
-        cube[5][1] = cube[1][3]
-        cube[1][3] = temp
-
-        temp = cube[0][4]
-        cube[0][4] = cube[3][6]
-        cube[3][6] = cube[5][0]
-        cube[5][0] = cube[1][2]
-        cube[1][2] = temp
-        return
+        cube[0][6], cube[3][0], cube[5][2], cube[1][4] = cube[3][0], cube[5][2], cube[1][4], cube[0][6]
+        cube[0][5], cube[3][7], cube[5][1], cube[1][3] = cube[3][7], cube[5][1], cube[1][3], cube[0][5]
+        cube[0][4], cube[3][6], cube[5][0], cube[1][2] = cube[3][6], cube[5][0], cube[1][2], cube[0][4]
     elif(move == "F2"):
         fMove("F")
         fMove("F")
@@ -269,46 +100,14 @@ def fMove(move):
 def bMove(move):
     if(move == "B"):
         faceMove(4)
-
-        temp = cube[0][2]
-        cube[0][2] = cube[3][4]
-        cube[3][4] = cube[5][6]
-        cube[5][6] = cube[1][0]
-        cube[1][0] = temp
-
-        temp = cube[0][1]
-        cube[0][1] = cube[3][3]
-        cube[3][3] = cube[5][5]
-        cube[5][5] = cube[1][7]
-        cube[1][7] = temp
-
-        temp = cube[0][0]
-        cube[0][0] = cube[3][2]
-        cube[3][2] = cube[5][4]
-        cube[5][4] = cube[1][6]
-        cube[1][6] = temp
-        return
+        cube[0][2], cube[3][4], cube[5][6], cube[1][0] = cube[3][4], cube[5][6], cube[1][0], cube[0][2]
+        cube[0][1], cube[3][3], cube[5][5], cube[1][7] = cube[3][3], cube[5][5], cube[1][7], cube[0][1]
+        cube[0][0], cube[3][2], cube[5][4], cube[1][6] = cube[3][2], cube[5][4], cube[1][6], cube[0][0]
     elif(move == "B'"):
         faceMovePrime(4)
-
-        temp = cube[0][2]
-        cube[0][2] = cube[1][0]
-        cube[1][0] = cube[5][6]
-        cube[5][6] = cube[3][4]
-        cube[3][4] = temp
-
-        temp = cube[0][1]
-        cube[0][1] = cube[1][7]
-        cube[1][7] = cube[5][5]
-        cube[5][5] = cube[3][3]
-        cube[3][3] = temp
-
-        temp = cube[0][0]
-        cube[0][0] = cube[1][6]
-        cube[1][6] = cube[5][4]
-        cube[5][4] = cube[3][2]
-        cube[3][2] = temp
-        return
+        cube[0][2], cube[1][0], cube[5][6], cube[3][4] = cube[1][0], cube[5][6], cube[3][4], cube[0][2]
+        cube[0][1], cube[1][7], cube[5][5], cube[3][3] = cube[1][7], cube[5][5], cube[3][3], cube[0][1]
+        cube[0][0], cube[1][6], cube[5][4], cube[3][2] = cube[1][6], cube[5][4], cube[3][2], cube[0][0]
     elif(move == "B2"):
         bMove("B")
         bMove("B")
@@ -325,44 +124,24 @@ def scramble(scr, len):
         'B': bMove(str(x[0])+str(x[1]))
         }.get(x[0], 0)
 
-    # print(
-    #                                             "    " + cube[0][0] + cube[0][1] + cube[0][2] + "\n" +
-    #                                             "    " + cube[0][7] + "w" + cube[0][3] + "\n" +
-    #                                             "    " + cube[0][6] + cube[0][5] + cube[0][4] + "\n\n" +
-    #     cube[1][0] + cube[1][1] + cube[1][2] + " " + cube[2][0] + cube[2][1] + cube[2][2] + " " + cube[3][0] + cube[3][1] + cube[3][2] + " " + cube[4][0] + cube[4][1] + cube[4][2] + "\n" +
-    #     cube[1][7] + "o" + cube[1][3] + " " + cube[2][7] + "g" + cube[2][3] + " " + cube[3][7] + "r" + cube[3][3] + " " + cube[4][7] + "b" + cube[4][3] + "\n" +
-    #     cube[1][6] + cube[1][5] + cube[1][4] + " " + cube[2][6] + cube[2][5] + cube[2][4] + " " + cube[3][6] + cube[3][5] + cube[3][4] + " " + cube[4][6] + cube[4][5] + cube[4][4] + "\n\n" +
-    #                                             "    " + cube[5][0] + cube[5][1] + cube[5][2] + "\n" +
-    #                                             "    " + cube[5][7] + "y" + cube[5][3] + "\n" +
-    #                                             "    " + cube[5][6] + cube[5][5] + cube[5][4] + "\n"
-    # )
-    #
+    if('-cv' not in sys.argv):
+        print(
+                                                    "    " + cube[0][0] + cube[0][1] + cube[0][2] + "\n" +
+                                                    "    " + cube[0][7] + "w" + cube[0][3] + "\n" +
+                                                    "    " + cube[0][6] + cube[0][5] + cube[0][4] + "\n\n" +
+            cube[1][0] + cube[1][1] + cube[1][2] + " " + cube[2][0] + cube[2][1] + cube[2][2] + " " + cube[3][0] + cube[3][1] + cube[3][2] + " " + cube[4][0] + cube[4][1] + cube[4][2] + "\n" +
+            cube[1][7] + "o" + cube[1][3] + " " + cube[2][7] + "g" + cube[2][3] + " " + cube[3][7] + "r" + cube[3][3] + " " + cube[4][7] + "b" + cube[4][3] + "\n" +
+            cube[1][6] + cube[1][5] + cube[1][4] + " " + cube[2][6] + cube[2][5] + cube[2][4] + " " + cube[3][6] + cube[3][5] + cube[3][4] + " " + cube[4][6] + cube[4][5] + cube[4][4] + "\n\n" +
+                                                    "    " + cube[5][0] + cube[5][1] + cube[5][2] + "\n" +
+                                                    "    " + cube[5][7] + "y" + cube[5][3] + "\n" +
+                                                    "    " + cube[5][6] + cube[5][5] + cube[5][4] + "\n"
+        )
     return cube
-
-
-
-import cv2 as cv
-import numpy as np
 
 size = 500, 700, 3
 scrambleImg = np.zeros(size, dtype=np.uint8)
 
 colorAr = []
-
-for y in range(6):
-    for z in range(8):
-        if(cube[y][z] == 'w'):
-            cube[y][z] = (255,255,255)
-        elif(cube[y][z] == 'o'):
-            cube[y][z] = (0,165,255)
-        elif(cube[y][z] == 'g'):
-            cube[y][z] = (0,255,0)
-        elif(cube[y][z] == 'r'):
-            cube[y][z] = (0,0,255)
-        elif(cube[y][z] == 'b'):
-            cube[y][z] = (255,0,0)
-        elif(cube[y][z] == 'y'):
-            cube[y][z] = (0,255,255)
 
 def topRow(s, pt1, pt2, pt3, x):
     cv.rectangle(scrambleImg, (pt1+x, pt1), (pt1+s+x, pt1+s), cube[0][0], -1)
@@ -445,6 +224,21 @@ def bottomRow(s, pt1, pt2, pt3, sep, x):
     return
 
 def image(scr):
+    for y in range(6):
+        for z in range(8):
+            if(cube[y][z] == 'w'):
+                cube[y][z] = (255,255,255)
+            elif(cube[y][z] == 'o'):
+                cube[y][z] = (0,165,255)
+            elif(cube[y][z] == 'g'):
+                cube[y][z] = (0,255,0)
+            elif(cube[y][z] == 'r'):
+                cube[y][z] = (0,0,255)
+            elif(cube[y][z] == 'b'):
+                cube[y][z] = (255,0,0)
+            elif(cube[y][z] == 'y'):
+                cube[y][z] = (0,255,255)
+
     x = 100
     s = 30
     pt1 = 50
