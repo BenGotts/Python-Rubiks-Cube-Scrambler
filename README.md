@@ -9,6 +9,9 @@ If the OpenCV is running correctly, it should look like:
 ![Example](pyImageEx.PNG)
 
 If you don't have OpenCV installed and want to, then run
+
 "pip install opencv-python" (python 2)
+
 or
+
 "pip3 install opencv-python" (python 3)
