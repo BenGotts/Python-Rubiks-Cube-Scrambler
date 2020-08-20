@@ -24,6 +24,6 @@ def valid(ar):
         while ar[x][0] == ar[x-2][0] or ar[x][0] == ar[x-1][0]:
             ar[x][0] = random.choice(moves)
     return ar
-
+ 
 s = gen_scramble()
 print(s)
